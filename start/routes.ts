@@ -27,7 +27,14 @@ router
 
     router.get('/:id', [controllers.Posts, 'show'])
 
-    router.post('/:id/comments', [controllers.Comments, 'store']).use(middleware.auth())
+    router
+      .group(() => {
+        router.get('/:id/edit', [controllers.Posts, 'edit'])
+        router.put('/:id', [controllers.Posts, 'update'])
+        router.delete('/posts/:id', [controllers.Posts, 'destroy'])
+        router.post('/:id/comments', [controllers.Comments, 'store'])
+      })
+      .use(middleware.auth())
   })
   .prefix('/posts')
 

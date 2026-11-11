@@ -8,6 +8,9 @@ export interface ApiDefinition {
     create: typeof routes['posts.create']
     store: typeof routes['posts.store']
     show: typeof routes['posts.show']
+    edit: typeof routes['posts.edit']
+    update: typeof routes['posts.update']
+    destroy: typeof routes['posts.destroy']
   }
   comments: {
     store: typeof routes['comments.store']

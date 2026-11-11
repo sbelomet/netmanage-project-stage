@@ -1,6 +1,7 @@
 import { InertiaProps } from '~/types'
 import { Data } from '@generated/data'
 import { Form } from '@adonisjs/inertia/react'
+import { Link } from '@adonisjs/inertia/react'
 import MarketingLayout from '~/layouts/marketing'
 
 type PageProps = InertiaProps<{
@@ -12,6 +13,9 @@ export default function PostsShow(props: PageProps) {
 
   return (
     <div className="container">
+      <Link route="posts.index">
+        &lsaquo; Go back to posts listing
+      </Link>
       <div>
         <h1>{post.title}</h1>
       </div>
@@ -29,6 +33,27 @@ export default function PostsShow(props: PageProps) {
         </div>
 
         <div className="post-summary">{post.summary}</div>
+
+        <div className="post-actions">
+          {post.can?.edit && (
+            <Link route="posts.edit" routeParams={{ id: post.id }}>
+              Edit post
+            </Link>
+          )}
+
+          {post.can?.delete && (
+            <>
+              <span>.</span>
+              <Form route="posts.destroy" routeParams={{ id: post.id }}>
+                {() => (
+                  <button type="submit" className="destructive">
+                    Delete
+                  </button>
+                )}
+              </Form>
+            </>
+          )}
+        </div>
 
         <div className="post-comments">
           <h2>Comments</h2>

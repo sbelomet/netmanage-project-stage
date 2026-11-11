@@ -38,6 +38,24 @@ const routes = {
     tokens: [[0,"posts"],[1,"id"]],
     types: placeholder as Registry['posts.show']['types'],
   },
+  'posts.edit': {
+    methods: ["GET","HEAD"],
+    pattern: '/posts/:id/edit',
+    tokens: [[0,"posts"],[1,"id"],[0,"edit"]],
+    types: placeholder as Registry['posts.edit']['types'],
+  },
+  'posts.update': {
+    methods: ["PUT"],
+    pattern: '/posts/:id',
+    tokens: [[0,"posts"],[1,"id"]],
+    types: placeholder as Registry['posts.update']['types'],
+  },
+  'posts.destroy': {
+    methods: ["DELETE"],
+    pattern: '/posts/posts/:id',
+    tokens: [[0,"posts"],[0,"posts"],[1,"id"]],
+    types: placeholder as Registry['posts.destroy']['types'],
+  },
   'comments.store': {
     methods: ["POST"],
     pattern: '/posts/:id/comments',
