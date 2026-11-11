@@ -1,0 +1,12 @@
+#REPL CHECK MODELS
+const { default: Client } = await import('#models/client')
+const { default: Department } = await import('#models/department')
+const { default: User } = await import('#models/user')
+const { default: ClientMembership } = await import('#models/client_membership')
+const { default: DepartmentMembership } = await import('#models/department_membership')
+
+console.log(await Client.query())
+console.log(await Department.query())
+console.log(await User.query())
+console.log(await ClientMembership.query())
+console.log(await DepartmentMembership.query())
