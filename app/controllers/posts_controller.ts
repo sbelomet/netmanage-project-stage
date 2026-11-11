@@ -12,4 +12,15 @@ export default class PostsController {
             posts: PostTransformer.transform(posts),
         })
     }
+
+    async show({ inertia, params }: HttpContext) {
+        const post = await Post.query()
+            .where('id', params.id)
+            .preload('user')
+            .firstOrFail()
+        
+        return inertia.render('posts/show', {
+            post: PostTransformer.transform(post),
+        })
+    }
 }
