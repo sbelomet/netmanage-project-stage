@@ -11,6 +11,7 @@ import { middleware } from '#start/kernel'
 import { controllers } from '#generated/controllers'
 import router from '@adonisjs/core/services/router'
 
+
 router.on('/').renderInertia('home', {}).as('home')
 
 router
@@ -25,6 +26,8 @@ router
       .use(middleware.auth())
 
     router.get('/:id', [controllers.Posts, 'show'])
+
+    router.post('/:id/comments', [controllers.Comments, 'store']).use(middleware.auth())
   })
   .prefix('/posts')
 

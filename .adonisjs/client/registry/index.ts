@@ -38,6 +38,12 @@ const routes = {
     tokens: [[0,"posts"],[1,"id"]],
     types: placeholder as Registry['posts.show']['types'],
   },
+  'comments.store': {
+    methods: ["POST"],
+    pattern: '/posts/:id/comments',
+    tokens: [[0,"posts"],[1,"id"],[0,"comments"]],
+    types: placeholder as Registry['comments.store']['types'],
+  },
   'new_account.create': {
     methods: ["GET","HEAD"],
     pattern: '/signup',
