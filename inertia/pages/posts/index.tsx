@@ -1,5 +1,6 @@
 import { InertiaProps } from '~/types'
 import { Data } from '@generated/data'
+import { Link } from '@adonisjs/inertia/react'
 import MarketingLayout from '~/layouts/marketing'
 
 type PageProps = InertiaProps<{
@@ -17,7 +18,9 @@ export default function PostsIndex(props: PageProps) {
 
       {posts.map((post) => (
         <div key={post.id} className="post-item">
-          <h2>{post.title}</h2>
+          <Link route="posts.show" routeParams={{ id: post.id }}>
+            <h2>{post.title}</h2>
+          </Link>
 
           <div className="post-meta">
             <div>By {post.author.fullName}</div>
@@ -31,7 +34,9 @@ export default function PostsIndex(props: PageProps) {
 
             <span>.</span>
             <div>
-              <a href={`/posts/${post.id}`}>View comments</a>
+              <Link route="posts.show" routeParams={{ id: post.id }}>
+                View comments
+              </Link>
             </div>
           </div>
         </div>
