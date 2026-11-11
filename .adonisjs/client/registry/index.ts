@@ -20,6 +20,18 @@ const routes = {
     tokens: [[0,"posts"]],
     types: placeholder as Registry['posts.index']['types'],
   },
+  'posts.create': {
+    methods: ["GET","HEAD"],
+    pattern: '/posts/create',
+    tokens: [[0,"posts"],[0,"create"]],
+    types: placeholder as Registry['posts.create']['types'],
+  },
+  'posts.store': {
+    methods: ["POST"],
+    pattern: '/posts',
+    tokens: [[0,"posts"]],
+    types: placeholder as Registry['posts.store']['types'],
+  },
   'posts.show': {
     methods: ["GET","HEAD"],
     pattern: '/posts/:id',

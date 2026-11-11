@@ -1,6 +1,7 @@
 import Post from '#models/post'
 import type { HttpContext } from '@adonisjs/core/http'
 import PostTransformer from '#transformers/post_transformer'
+import { createPostValidator } from '#validators/post'
 
 export default class PostsController {
     async index({ inertia }: HttpContext) {
@@ -25,5 +26,20 @@ export default class PostsController {
         return inertia.render('posts/show', {
             post: PostTransformer.transform(post),
         })
+    }
+
+    async create({ inertia }: HttpContext) {
+        return inertia.render('posts/create', {})
+    }
+
+    async store({ request, auth, response }: HttpContext) {
+        const payload = await request.validateUsing(createPostValidator)
+
+        await Post.create({
+            ...payload,
+            userId: auth.user!.id,
+        })
+
+        return response.redirect().toRoute('posts.index')
     }
 }
