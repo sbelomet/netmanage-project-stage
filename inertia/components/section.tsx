@@ -7,18 +7,28 @@ import { type ReactNode } from 'react'
  */
 export default function Section({
   title,
+  titleLevel,
   description,
   children,
 }: {
   title?: string
+  titleLevel?: 2 | 3
   description?: ReactNode
   children: ReactNode
 }) {
+  const Title = titleLevel === 3 ? 'h3' : 'h2'
+
   return (
     <section className="section">
       {(title || description) && (
         <header className="section__header">
-          {title && <h2 className="section__title">{title}</h2>}
+          {title && (
+            <Title
+              className={`section__title${titleLevel ? ` section__title--level-${titleLevel}` : ''}`}
+            >
+              {title}
+            </Title>
+          )}
           {description && <p className="section__description">{description}</p>}
         </header>
       )}
