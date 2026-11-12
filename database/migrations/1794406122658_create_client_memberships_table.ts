@@ -6,7 +6,6 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.boolean('is_admin').notNullable().defaultTo(false)
       table.unique(['user_id', 'client_id'])
 
       table.integer('user_id').unsigned().notNullable()
@@ -14,6 +13,9 @@ export default class extends BaseSchema {
 
       table.integer('client_id').unsigned().notNullable()
       table.foreign('client_id').references('clients.id').onDelete('CASCADE')
+
+      table.integer('role_id').unsigned().notNullable()
+      table.foreign('role_id').references('roles.id')
 
       table.timestamp('created_at')
       table.timestamp('updated_at')

@@ -15,9 +15,12 @@ export default function MarketingLayout({ children }: { children: ReactNode }) {
           <div className="header__right">
             <ThemeToggle />
             {props.user ? (
-              <Link route="dashboard" className="btn btn--primary btn--sm">
-                Dashboard
-              </Link>
+              <>
+                <span>{props.user.fullName ?? props.user.email}</span>
+                <Link route="dashboard" className="btn btn--primary btn--sm">
+                  Dashboard
+                </Link>
+              </>
             ) : (
               <>
                 <Link route="session.create" className="btn btn--ghost btn--sm">

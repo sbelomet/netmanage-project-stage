@@ -1,10 +1,12 @@
 import factory from '@adonisjs/lucid/factories'
 import ClientMembership from '#models/client_membership'
+import Role from '#models/role'
 
 export const ClientMembershipFactory = factory
-  .define(ClientMembership, async ({ faker }) => {
+  .define(ClientMembership, async () => {
+    
+
     return {
-      isAdmin: faker.datatype.boolean(),
     }
   })
   .build()

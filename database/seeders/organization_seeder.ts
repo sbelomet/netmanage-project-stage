@@ -4,25 +4,55 @@ import { ClientMembershipFactory } from '#database/factories/client_membership_f
 import { DepartmentFactory } from '#database/factories/department_factory'
 import { DepartmentMembershipFactory } from '#database/factories/department_membership_factory'
 import { UserFactory } from '#database/factories/user_factory'
+import Role from '#models/role'
 
 export default class OrganizationSeeder extends BaseSeeder {
   async run() {
-    const client = await ClientFactory.create()
-    const departments = await DepartmentFactory.merge({ clientId: client.id }).createMany(3)
-    const users = await UserFactory.createMany(3)
+    const memberRole = await Role.findByOrFail('name', 'member')
+    const adminRole = await Role.findByOrFail('name', 'admin')
+    const clientGroups = []
 
-    for (const [index, user] of users.entries()) {
+    for (let index = 0; index < 3; index++) {
+      const client = await ClientFactory.create()
+      const departments = await DepartmentFactory.merge({ clientId: client.id }).createMany(4)
+      clientGroups.push({ client, departments })
+    }
+
+    const users = await UserFactory.createMany(5)
+
+    for (const [userIndex, user] of users.entries()) {
+      const clientGroup = clientGroups[userIndex % clientGroups.length]
+      if (!clientGroup) {
+        throw new Error('Expected a client group for each user')
+      }
+
+      const isClientAdmin = Math.random() < 0.5
+
       await ClientMembershipFactory.merge({
         userId: user.id,
-        clientId: client.id,
-        isAdmin: index === 0,
+        clientId: clientGroup.client.id,
+        roleId: isClientAdmin ? adminRole.id : memberRole.id,
       }).create()
 
-      for (const [departmentIndex, department] of departments.entries()) {
+      if (isClientAdmin) continue
+
+      const availableDepartments = [...clientGroup.departments]
+      const departmentCount = Math.floor(Math.random() * (availableDepartments.length - 1)) + 1
+      const departmentsForUser = []
+
+      for (let index = 0; index < departmentCount; index++) {
+        const departmentIndex = Math.floor(Math.random() * availableDepartments.length)
+        const [department] = availableDepartments.splice(departmentIndex, 1)
+        if (department) {
+          departmentsForUser.push(department)
+        }
+      }
+
+      for (const department of departmentsForUser) {
         await DepartmentMembershipFactory.merge({
           userId: user.id,
           departmentId: department.id,
-          isAdmin: index === 1 && departmentIndex === 0,
+          roleId: Math.random() < 0.5 ? memberRole.id : adminRole.id,
         }).create()
       }
     }

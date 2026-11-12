@@ -2,6 +2,7 @@ import Logo from '~/components/logo'
 import { type ReactNode } from 'react'
 import { House, LogOut } from 'lucide-react'
 import { Form } from '@adonisjs/inertia/react'
+import { usePage } from '@inertiajs/react'
 import FlashToasts from '~/components/flash_toasts'
 import ThemeToggle from '~/components/theme_toggle'
 import NavLink, { type NavItem } from '~/components/nav_link'
@@ -13,12 +14,15 @@ import NavLink, { type NavItem } from '~/components/nav_link'
 const nav: NavItem[] = [{ label: 'Dashboard', route: 'dashboard', icon: House }]
 
 export default function AppLayout({ children }: { children: ReactNode }) {
+  const { props } = usePage()
+
   return (
     <>
       <header className="header header--bar">
         <div className="header__inner">
           <Logo size={28} />
           <div className="header__right">
+            {props.user && <span>{props.user.fullName ?? props.user.email}</span>}
             <ThemeToggle />
             <Form route="session.destroy">
               <button type="submit" className="btn btn--secondary btn--sm">

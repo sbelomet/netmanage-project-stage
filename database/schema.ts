@@ -8,7 +8,7 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
 export class ClientMembershipSchema extends BaseModel {
-  static $columns = ['clientId', 'createdAt', 'id', 'isAdmin', 'updatedAt', 'userId'] as const
+  static $columns = ['clientId', 'createdAt', 'id', 'roleId', 'updatedAt', 'userId'] as const
   $columns = ClientMembershipSchema.$columns
   @column()
   declare clientId: number
@@ -17,7 +17,7 @@ export class ClientMembershipSchema extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
   @column()
-  declare isAdmin: boolean
+  declare roleId: number
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
   @column()
@@ -55,7 +55,7 @@ export class CommentSchema extends BaseModel {
 }
 
 export class DepartmentMembershipSchema extends BaseModel {
-  static $columns = ['createdAt', 'departmentId', 'id', 'isAdmin', 'updatedAt', 'userId'] as const
+  static $columns = ['createdAt', 'departmentId', 'id', 'roleId', 'updatedAt', 'userId'] as const
   $columns = DepartmentMembershipSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime | null
@@ -64,7 +64,7 @@ export class DepartmentMembershipSchema extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
   @column()
-  declare isAdmin: boolean
+  declare roleId: number
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
   @column()
@@ -103,6 +103,19 @@ export class PostSchema extends BaseModel {
   declare url: string
   @column()
   declare userId: number
+}
+
+export class RoleSchema extends BaseModel {
+  static $columns = ['createdAt', 'id', 'name', 'updatedAt'] as const
+  $columns = RoleSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime | null
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare name: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime | null
 }
 
 export class UserSchema extends BaseModel {

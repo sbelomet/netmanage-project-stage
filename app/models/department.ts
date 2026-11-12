@@ -1,12 +1,13 @@
 import { DepartmentSchema } from '#database/schema'
-import { hasMany } from '@adonisjs/lucid/orm'
-import type { HasMany } from '@adonisjs/lucid/types/relations'
+import { belongsTo, hasMany } from '@adonisjs/lucid/orm'
+import type { BelongsTo, HasMany } from '@adonisjs/lucid/types/relations'
+import Client from '#models/client'
 import DepartmentMembership from '#models/department_membership'
 
 export default class Department extends DepartmentSchema {
-    /**
-     * A department has many department memberships
-     */
-    @hasMany(() => DepartmentMembership)
-    declare department_membership: HasMany<typeof DepartmentMembership>
+  @belongsTo(() => Client)
+  declare client: BelongsTo<typeof Client>
+
+  @hasMany(() => DepartmentMembership)
+  declare department_membership: HasMany<typeof DepartmentMembership>
 }

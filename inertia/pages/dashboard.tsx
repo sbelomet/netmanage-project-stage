@@ -1,23 +1,66 @@
 import Page from '~/components/page'
-import { LayoutGrid } from 'lucide-react'
+import Section from '~/components/section'
 import AppLayout from '~/layouts/app'
 
-export default function Dashboard() {
+type ClientMembership = {
+  id: number
+  name: string
+  role: string
+}
+
+type DepartmentMembership = {
+  id: number
+  name: string
+  clientName: string
+  role: string
+}
+
+type DashboardProps = {
+  clientMemberships: ClientMembership[]
+  departmentMemberships: DepartmentMembership[]
+}
+
+export default function Dashboard({ clientMemberships, departmentMemberships }: DashboardProps) {
   return (
-    <Page title="Dashboard" hideTitle>
-      <div className="empty">
-        <div className="empty__mark">
-          <LayoutGrid size={22} />
-        </div>
-        <h1>Your dashboard is ready</h1>
-        <p>
-          It&apos;s empty on purpose. A clean starting point with nothing to undo. Add your first
-          route and component to begin.
-        </p>
-        <p className="mono" style={{ fontSize: 12.5, color: 'var(--subtle)', marginTop: 4 }}>
-          Start in <span className="kbd">inertia/pages</span>
-        </p>
-      </div>
+    <Page title="Dashboard" description="These are the clients and departments you have access to.">
+      <Section title="Clients" description="Your client memberships">
+        {clientMemberships.length > 0 ? (
+          <ul className="access-grid">
+            {clientMemberships.map((membership) => (
+              <li className="panel access-card" key={membership.id}>
+                <div>
+                  <h3 className="access-card__name">{membership.name}</h3>
+                  <p className="access-card__context">Client</p>
+                </div>
+                <span className="access-role">{membership.role}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="access-empty">You don&apos;t have access to any clients yet.</p>
+        )}
+      </Section>
+
+      <Section
+        title="Departments"
+        description="Your department access, including access inherited from client admin roles"
+      >
+        {departmentMemberships.length > 0 ? (
+          <ul className="access-grid">
+            {departmentMemberships.map((membership) => (
+              <li className="panel access-card" key={membership.id}>
+                <div>
+                  <h3 className="access-card__name">{membership.name}</h3>
+                  <p className="access-card__context">{membership.clientName}</p>
+                </div>
+                <span className="access-role">{membership.role}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="access-empty">You don&apos;t have access to any departments yet.</p>
+        )}
+      </Section>
     </Page>
   )
 }

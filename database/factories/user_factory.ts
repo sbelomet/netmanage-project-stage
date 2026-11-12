@@ -1,4 +1,3 @@
-import hash from '@adonisjs/core/services/hash'
 import factory from '@adonisjs/lucid/factories'
 import User from '#models/user'
 
@@ -7,7 +6,7 @@ export const UserFactory = factory
     return {
       fullName: faker.person.fullName(),
       email: faker.internet.email().toLowerCase(),
-      password: await hash.make('password'),
+      password: '12345678',
     }
   })
   .build()
