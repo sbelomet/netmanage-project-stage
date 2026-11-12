@@ -34,7 +34,9 @@ export default function ClientAdminShow({ clientName, departments }: ClientAdmin
                       {member.role}
                     </li>
                   ))}
+                  <button>Add Member</button>
                 </ul>
+                
               ) : (
                 <p>No members in this department yet.</p>
               )}
@@ -44,13 +46,11 @@ export default function ClientAdminShow({ clientName, departments }: ClientAdmin
           <p>No departments yet.</p>
         )}
       </Section>
-      <Section title='Manage content' titleLevel={2}>
+      <Section title="Manage content" titleLevel={2}>
         {departments.length > 0 ? (
           departments.map((department) => (
             <Section key={department.id} title={department.name} titleLevel={3}>
-              {
-                <p>No content in this department yet.</p>
-              }
+              {<p>No content in this department yet.</p>}
             </Section>
           ))
         ) : (
