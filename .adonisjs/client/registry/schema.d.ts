@@ -192,11 +192,11 @@ export interface Registry {
   }
   'clients.admin.show': {
     methods: ["GET","HEAD"]
-    pattern: '/clients/:clientName/admin/:id'
+    pattern: '/clients/:clientSlug/admin/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue, ParamValue]
-      params: { clientName: ParamValue; id: ParamValue }
+      params: { clientSlug: ParamValue; id: ParamValue }
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/client_admins_controller').default['show']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client_admins_controller').default['show']>>>
@@ -205,11 +205,11 @@ export interface Registry {
   }
   'departments.show': {
     methods: ["GET","HEAD"]
-    pattern: '/clients/:clientName/departments/:id'
+    pattern: '/clients/:clientSlug/departments/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue, ParamValue]
-      params: { clientName: ParamValue; id: ParamValue }
+      params: { clientSlug: ParamValue; id: ParamValue }
       query: {}
       response: ExtractResponse<Awaited<ReturnType<import('#controllers/departments_controller').default['show']>>>
       errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/departments_controller').default['show']>>>

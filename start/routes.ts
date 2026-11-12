@@ -51,10 +51,10 @@ router
   .group(() => {
     router.get('/dashboard', [controllers.Dashboard, 'show']).as('dashboard')
     router
-      .get('/clients/:clientName/admin/:id', [controllers.ClientAdmins, 'show'])
+      .get('/clients/:clientSlug/admin/:id', [controllers.ClientAdmins, 'show'])
       .as('clients.admin.show')
     router
-      .get('/clients/:clientName/departments/:id', [controllers.Departments, 'show'])
+      .get('/clients/:clientSlug/departments/:id', [controllers.Departments, 'show'])
       .as('departments.show')
     router.post('logout', [controllers.Session, 'destroy'])
   })

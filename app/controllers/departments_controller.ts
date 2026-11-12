@@ -1,5 +1,6 @@
 import Client from '#models/client'
 import Department from '#models/department'
+import { clientNameToSlug } from '#services/client_slug_service'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class DepartmentsController {
@@ -8,7 +9,7 @@ export default class DepartmentsController {
     const client = await Client.findOrFail(department.clientId)
     const clientName = client.name ?? 'Unnamed client'
 
-    if (clientName !== params.clientName) {
+    if (clientNameToSlug(clientName) !== params.clientSlug) {
       return response.abort(404)
     }
 

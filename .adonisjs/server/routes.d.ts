@@ -18,8 +18,8 @@ export type ScannedRoutes = {
     'session.create': { paramsTuple?: []; params?: {} }
     'session.store': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
-    'clients.admin.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientName': ParamValue,'id': ParamValue} }
-    'departments.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientName': ParamValue,'id': ParamValue} }
+    'clients.admin.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientSlug': ParamValue,'id': ParamValue} }
+    'departments.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientSlug': ParamValue,'id': ParamValue} }
     'session.destroy': { paramsTuple?: []; params?: {} }
   }
   GET: {
@@ -31,8 +31,8 @@ export type ScannedRoutes = {
     'new_account.create': { paramsTuple?: []; params?: {} }
     'session.create': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
-    'clients.admin.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientName': ParamValue,'id': ParamValue} }
-    'departments.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientName': ParamValue,'id': ParamValue} }
+    'clients.admin.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientSlug': ParamValue,'id': ParamValue} }
+    'departments.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientSlug': ParamValue,'id': ParamValue} }
   }
   HEAD: {
     'home': { paramsTuple?: []; params?: {} }
@@ -43,8 +43,8 @@ export type ScannedRoutes = {
     'new_account.create': { paramsTuple?: []; params?: {} }
     'session.create': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
-    'clients.admin.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientName': ParamValue,'id': ParamValue} }
-    'departments.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientName': ParamValue,'id': ParamValue} }
+    'clients.admin.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientSlug': ParamValue,'id': ParamValue} }
+    'departments.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientSlug': ParamValue,'id': ParamValue} }
   }
   POST: {
     'posts.store': { paramsTuple?: []; params?: {} }

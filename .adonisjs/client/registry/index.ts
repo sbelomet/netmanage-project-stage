@@ -94,14 +94,14 @@ const routes = {
   },
   'clients.admin.show': {
     methods: ["GET","HEAD"],
-    pattern: '/clients/:clientName/admin/:id',
-    tokens: [[0,"clients"],[1,"clientName"],[0,"admin"],[1,"id"]],
+    pattern: '/clients/:clientSlug/admin/:id',
+    tokens: [[0,"clients"],[1,"clientSlug"],[0,"admin"],[1,"id"]],
     types: placeholder as Registry['clients.admin.show']['types'],
   },
   'departments.show': {
     methods: ["GET","HEAD"],
-    pattern: '/clients/:clientName/departments/:id',
-    tokens: [[0,"clients"],[1,"clientName"],[0,"departments"],[1,"id"]],
+    pattern: '/clients/:clientSlug/departments/:id',
+    tokens: [[0,"clients"],[1,"clientSlug"],[0,"departments"],[1,"id"]],
     types: placeholder as Registry['departments.show']['types'],
   },
   'session.destroy': {

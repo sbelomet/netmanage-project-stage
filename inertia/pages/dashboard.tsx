@@ -7,6 +7,7 @@ type ClientAdmin = {
   id: number
   clientId: number
   name: string
+  clientSlug: string
 }
 
 type DepartmentMembership = {
@@ -14,6 +15,7 @@ type DepartmentMembership = {
   departmentId: number
   name: string
   clientName: string
+  clientSlug: string
   role: string
 }
 
@@ -33,7 +35,7 @@ export default function Dashboard({ clientAdmins, departmentMemberships }: Dashb
                 <Link
                   route="clients.admin.show"
                   routeParams={{
-                    clientName: clientAdmin.name,
+                    clientSlug: clientAdmin.clientSlug,
                     id: clientAdmin.clientId,
                   }}
                   className="panel access-card access-card--link"
@@ -57,7 +59,7 @@ export default function Dashboard({ clientAdmins, departmentMemberships }: Dashb
                 <Link
                   route="departments.show"
                   routeParams={{
-                    clientName: membership.clientName,
+                    clientSlug: membership.clientSlug,
                     id: membership.departmentId,
                   }}
                   className="panel access-card access-card--link"
