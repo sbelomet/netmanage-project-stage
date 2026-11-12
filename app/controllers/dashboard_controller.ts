@@ -23,6 +23,7 @@ export default class DashboardController {
     return inertia.render('dashboard', {
       clientAdmins: clientAdmins.map((clientAdmin) => ({
         id: clientAdmin.id,
+        clientId: clientAdmin.client.id,
         name: clientAdmin.client.name ?? 'Unnamed client',
       })),
       departmentMemberships: departmentMemberships.map((membership) => ({

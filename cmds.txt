@@ -14,3 +14,5 @@ console.log(await DepartmentMembership.query())
 Name: Wilfred Lemke-Hills
 Email: camron.osinski1@gmail.com
 Password: 12345678
+
+http://localhost:3333/clients/Botsford%20-%20Stanton/admin/1

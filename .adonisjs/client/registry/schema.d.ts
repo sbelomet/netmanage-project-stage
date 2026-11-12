@@ -190,6 +190,19 @@ export interface Registry {
       rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/dashboard_controller').default['show']>>>
     }
   }
+  'clients.admin.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/clients/:clientName/admin/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue, ParamValue]
+      params: { clientName: ParamValue; id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/client_admins_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/client_admins_controller').default['show']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/client_admins_controller').default['show']>>>
+    }
+  }
   'departments.show': {
     methods: ["GET","HEAD"]
     pattern: '/clients/:clientName/departments/:id'

@@ -25,6 +25,11 @@ export interface ApiDefinition {
     destroy: typeof routes['session.destroy']
   }
   dashboard: typeof routes['dashboard']
+  clients: {
+    admin: {
+      show: typeof routes['clients.admin.show']
+    }
+  }
   departments: {
     show: typeof routes['departments.show']
   }

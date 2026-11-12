@@ -4,6 +4,7 @@
  */
 
 export const controllers = {
+  ClientAdmins: () => import('#controllers/client_admins_controller'),
   Comments: () => import('#controllers/comments_controller'),
   Dashboard: () => import('#controllers/dashboard_controller'),
   Departments: () => import('#controllers/departments_controller'),

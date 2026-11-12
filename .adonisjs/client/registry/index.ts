@@ -92,6 +92,12 @@ const routes = {
     tokens: [[0,"dashboard"]],
     types: placeholder as Registry['dashboard']['types'],
   },
+  'clients.admin.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/clients/:clientName/admin/:id',
+    tokens: [[0,"clients"],[1,"clientName"],[0,"admin"],[1,"id"]],
+    types: placeholder as Registry['clients.admin.show']['types'],
+  },
   'departments.show': {
     methods: ["GET","HEAD"],
     pattern: '/clients/:clientName/departments/:id',

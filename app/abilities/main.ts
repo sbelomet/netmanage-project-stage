@@ -14,24 +14,32 @@
 
 import { Bouncer } from '@adonisjs/bouncer'
 import ClientAdmin from '#models/client_admin'
+import type Client from '#models/client'
 import DepartmentMembership from '#models/department_membership'
 import type Department from '#models/department'
 import type User from '#models/user'
 
-export const viewDepartmentContent = Bouncer.ability(
-  async (user: User, department: Department) => {
-    const clientAdmin = await ClientAdmin.query()
-      .where('userId', user.id)
-      .where('clientId', department.clientId)
-      .first()
+export const viewClientAdminPage = Bouncer.ability(async (user: User, client: Client) => {
+  const clientAdmin = await ClientAdmin.query()
+    .where('userId', user.id)
+    .where('clientId', client.id)
+    .first()
 
-    if (clientAdmin) return true
+  return Boolean(clientAdmin)
+})
 
-    const departmentMembership = await DepartmentMembership.query()
-      .where('userId', user.id)
-      .where('departmentId', department.id)
-      .first()
+export const viewDepartmentContent = Bouncer.ability(async (user: User, department: Department) => {
+  const clientAdmin = await ClientAdmin.query()
+    .where('userId', user.id)
+    .where('clientId', department.clientId)
+    .first()
 
-    return Boolean(departmentMembership)
-  }
-)
+  if (clientAdmin) return true
+
+  const departmentMembership = await DepartmentMembership.query()
+    .where('userId', user.id)
+    .where('departmentId', department.id)
+    .first()
+
+  return Boolean(departmentMembership)
+})

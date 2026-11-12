@@ -6,8 +6,9 @@ export default class DepartmentsController {
   async show({ bouncer, inertia, params, response }: HttpContext) {
     const department = await Department.findOrFail(params.id)
     const client = await Client.findOrFail(department.clientId)
+    const clientName = client.name ?? 'Unnamed client'
 
-    if (client.name !== params.clientName) {
+    if (clientName !== params.clientName) {
       return response.abort(404)
     }
 
@@ -15,7 +16,7 @@ export default class DepartmentsController {
 
     return inertia.render('departments/show', {
       departmentName: department.name ?? 'Unnamed department',
-      clientName: client.name ?? 'Unnamed client',
+      clientName,
     })
   }
 }

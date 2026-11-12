@@ -5,6 +5,7 @@ import { Link } from '@adonisjs/inertia/react'
 
 type ClientAdmin = {
   id: number
+  clientId: number
   name: string
 }
 
@@ -29,12 +30,19 @@ export default function Dashboard({ clientAdmins, departmentMemberships }: Dashb
           <ul className="access-grid">
             {clientAdmins.map((clientAdmin) => (
               <li key={clientAdmin.id}>
-                <a className="panel access-card access-card--link" href="#">
+                <Link
+                  route="clients.admin.show"
+                  routeParams={{
+                    clientName: clientAdmin.name,
+                    id: clientAdmin.clientId,
+                  }}
+                  className="panel access-card access-card--link"
+                >
                   <div>
                     <h3 className="access-card__name">{clientAdmin.name}</h3>
                   </div>
                   <span className="access-role">Admin</span>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

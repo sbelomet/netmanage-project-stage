@@ -18,6 +18,7 @@ export type ScannedRoutes = {
     'session.create': { paramsTuple?: []; params?: {} }
     'session.store': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
+    'clients.admin.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientName': ParamValue,'id': ParamValue} }
     'departments.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientName': ParamValue,'id': ParamValue} }
     'session.destroy': { paramsTuple?: []; params?: {} }
   }
@@ -30,6 +31,7 @@ export type ScannedRoutes = {
     'new_account.create': { paramsTuple?: []; params?: {} }
     'session.create': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
+    'clients.admin.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientName': ParamValue,'id': ParamValue} }
     'departments.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientName': ParamValue,'id': ParamValue} }
   }
   HEAD: {
@@ -41,6 +43,7 @@ export type ScannedRoutes = {
     'new_account.create': { paramsTuple?: []; params?: {} }
     'session.create': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
+    'clients.admin.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientName': ParamValue,'id': ParamValue} }
     'departments.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientName': ParamValue,'id': ParamValue} }
   }
   POST: {
