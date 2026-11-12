@@ -13,11 +13,25 @@
 */
 
 import { Bouncer } from '@adonisjs/bouncer'
+import ClientAdmin from '#models/client_admin'
+import DepartmentMembership from '#models/department_membership'
+import type Department from '#models/department'
+import type User from '#models/user'
 
-/**
- * Delete the following ability to start from
- * scratch
- */
-export const editUser = Bouncer.ability(() => {
-  return true
-})
+export const viewDepartmentContent = Bouncer.ability(
+  async (user: User, department: Department) => {
+    const clientAdmin = await ClientAdmin.query()
+      .where('userId', user.id)
+      .where('clientId', department.clientId)
+      .first()
+
+    if (clientAdmin) return true
+
+    const departmentMembership = await DepartmentMembership.query()
+      .where('userId', user.id)
+      .where('departmentId', department.id)
+      .first()
+
+    return Boolean(departmentMembership)
+  }
+)

@@ -10,3 +10,7 @@ console.log(await Department.query())
 console.log(await User.query())
 console.log(await ClientMembership.query())
 console.log(await DepartmentMembership.query())
+
+Name: Wilfred Lemke-Hills
+Email: camron.osinski1@gmail.com
+Password: 12345678

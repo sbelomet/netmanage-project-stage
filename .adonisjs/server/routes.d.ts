@@ -18,6 +18,7 @@ export type ScannedRoutes = {
     'session.create': { paramsTuple?: []; params?: {} }
     'session.store': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
+    'departments.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientName': ParamValue,'id': ParamValue} }
     'session.destroy': { paramsTuple?: []; params?: {} }
   }
   GET: {
@@ -29,6 +30,7 @@ export type ScannedRoutes = {
     'new_account.create': { paramsTuple?: []; params?: {} }
     'session.create': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
+    'departments.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientName': ParamValue,'id': ParamValue} }
   }
   HEAD: {
     'home': { paramsTuple?: []; params?: {} }
@@ -39,6 +41,7 @@ export type ScannedRoutes = {
     'new_account.create': { paramsTuple?: []; params?: {} }
     'session.create': { paramsTuple?: []; params?: {} }
     'dashboard': { paramsTuple?: []; params?: {} }
+    'departments.show': { paramsTuple: [ParamValue,ParamValue]; params: {'clientName': ParamValue,'id': ParamValue} }
   }
   POST: {
     'posts.store': { paramsTuple?: []; params?: {} }

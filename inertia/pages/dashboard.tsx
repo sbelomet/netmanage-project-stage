@@ -1,6 +1,7 @@
 import Page from '~/components/page'
 import Section from '~/components/section'
 import AppLayout from '~/layouts/app'
+import { Link } from '@adonisjs/inertia/react'
 
 type ClientAdmin = {
   id: number
@@ -9,6 +10,7 @@ type ClientAdmin = {
 
 type DepartmentMembership = {
   id: number
+  departmentId: number
   name: string
   clientName: string
   role: string
@@ -23,14 +25,13 @@ export default function Dashboard({ clientAdmins, departmentMemberships }: Dashb
   return (
     <Page title="Dashboard" description="Welcome back !">
       {clientAdmins.length > 0 && (
-        <Section title="Client administration" description="Your company">
+        <Section title="Client administration" description="Manage your company's content">
           <ul className="access-grid">
             {clientAdmins.map((clientAdmin) => (
               <li key={clientAdmin.id}>
                 <a className="panel access-card access-card--link" href="#">
                   <div>
                     <h3 className="access-card__name">{clientAdmin.name}</h3>
-                    <p className="access-card__context">Client</p>
                   </div>
                   <span className="access-role">Admin</span>
                 </a>
@@ -45,13 +46,20 @@ export default function Dashboard({ clientAdmins, departmentMemberships }: Dashb
           <ul className="access-grid">
             {departmentMemberships.map((membership) => (
               <li key={membership.id}>
-                <a className="panel access-card access-card--link" href="#">
+                <Link
+                  route="departments.show"
+                  routeParams={{
+                    clientName: membership.clientName,
+                    id: membership.departmentId,
+                  }}
+                  className="panel access-card access-card--link"
+                >
                   <div>
                     <h3 className="access-card__name">{membership.name}</h3>
                     <p className="access-card__context">{membership.clientName}</p>
                   </div>
                   <span className="access-role">{membership.role}</span>
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

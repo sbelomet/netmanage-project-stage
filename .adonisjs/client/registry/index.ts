@@ -92,6 +92,12 @@ const routes = {
     tokens: [[0,"dashboard"]],
     types: placeholder as Registry['dashboard']['types'],
   },
+  'departments.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/clients/:clientName/departments/:id',
+    tokens: [[0,"clients"],[1,"clientName"],[0,"departments"],[1,"id"]],
+    types: placeholder as Registry['departments.show']['types'],
+  },
   'session.destroy': {
     methods: ["POST"],
     pattern: '/logout',

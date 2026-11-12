@@ -27,6 +27,7 @@ export default class DashboardController {
       })),
       departmentMemberships: departmentMemberships.map((membership) => ({
         id: membership.id,
+        departmentId: membership.department.id,
         name: membership.department.name ?? 'Unnamed department',
         clientName: membership.department.client.name ?? 'Unnamed client',
         role: membership.role.name,
