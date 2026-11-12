@@ -43,3 +43,13 @@ export const viewDepartmentContent = Bouncer.ability(async (user: User, departme
 
   return Boolean(departmentMembership)
 })
+
+export const manageDepartment = Bouncer.ability(async (user: User, department: Department) => {
+  const departmentMembership = await DepartmentMembership.query()
+    .where('userId', user.id)
+    .where('departmentId', department.id)
+    .preload('role')
+    .first()
+
+  return departmentMembership?.role.name === 'admin'
+})

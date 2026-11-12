@@ -14,10 +14,12 @@ export default class DepartmentsController {
     }
 
     await bouncer.authorize('viewDepartmentContent', department)
+    const isDepartmentAdmin = await bouncer.allows('manageDepartment', department)
 
     return inertia.render('departments/show', {
       departmentName: department.name ?? 'Unnamed department',
       clientName,
+      isDepartmentAdmin,
     })
   }
 }
