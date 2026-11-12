@@ -1,7 +1,7 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'client_memberships'
+  protected tableName = 'client_admins'
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
@@ -13,9 +13,6 @@ export default class extends BaseSchema {
 
       table.integer('client_id').unsigned().notNullable()
       table.foreign('client_id').references('clients.id').onDelete('CASCADE')
-
-      table.integer('role_id').unsigned().notNullable()
-      table.foreign('role_id').references('roles.id')
 
       table.timestamp('created_at')
       table.timestamp('updated_at')

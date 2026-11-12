@@ -5,8 +5,7 @@ import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { hasMany } from '@adonisjs/lucid/orm'
 import type { HasMany } from '@adonisjs/lucid/types/relations'
 import DepartmentMembership from '#models/department_membership'
-import ClientMembership from '#models/client_membership'
-
+import ClientAdmin from '#models/client_admin'
 
 export default class User extends compose(UserSchema, withAuthFinder(hash)) {
   get initials() {
@@ -18,14 +17,11 @@ export default class User extends compose(UserSchema, withAuthFinder(hash)) {
   }
 
   /**
-     * A user has many department memberships
-     */
-    @hasMany(() => DepartmentMembership)
-    declare department_membership: HasMany<typeof DepartmentMembership>
+   * A user has many department memberships
+   */
+  @hasMany(() => DepartmentMembership)
+  declare department_membership: HasMany<typeof DepartmentMembership>
 
-  /**
-     * A user has many client memberships
-     */
-    @hasMany(() => ClientMembership)
-    declare client_membership: HasMany<typeof ClientMembership>
+  @hasMany(() => ClientAdmin)
+  declare client_admins: HasMany<typeof ClientAdmin>
 }

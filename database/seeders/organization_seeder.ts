@@ -1,6 +1,6 @@
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 import { ClientFactory } from '#database/factories/client_factory'
-import { ClientMembershipFactory } from '#database/factories/client_membership_factory'
+import { ClientAdminFactory } from '#database/factories/client_admin_factory'
 import { DepartmentFactory } from '#database/factories/department_factory'
 import { DepartmentMembershipFactory } from '#database/factories/department_membership_factory'
 import { UserFactory } from '#database/factories/user_factory'
@@ -28,13 +28,13 @@ export default class OrganizationSeeder extends BaseSeeder {
 
       const isClientAdmin = Math.random() < 0.5
 
-      await ClientMembershipFactory.merge({
-        userId: user.id,
-        clientId: clientGroup.client.id,
-        roleId: isClientAdmin ? adminRole.id : memberRole.id,
-      }).create()
-
-      if (isClientAdmin) continue
+      if (isClientAdmin) {
+        await ClientAdminFactory.merge({
+          userId: user.id,
+          clientId: clientGroup.client.id,
+        }).create()
+        continue
+      }
 
       const availableDepartments = [...clientGroup.departments]
       const departmentCount = Math.floor(Math.random() * (availableDepartments.length - 1)) + 1

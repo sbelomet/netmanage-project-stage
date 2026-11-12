@@ -2,10 +2,9 @@ import Page from '~/components/page'
 import Section from '~/components/section'
 import AppLayout from '~/layouts/app'
 
-type ClientMembership = {
+type ClientAdmin = {
   id: number
   name: string
-  role: string
 }
 
 type DepartmentMembership = {
@@ -16,49 +15,48 @@ type DepartmentMembership = {
 }
 
 type DashboardProps = {
-  clientMemberships: ClientMembership[]
+  clientAdmins: ClientAdmin[]
   departmentMemberships: DepartmentMembership[]
 }
 
-export default function Dashboard({ clientMemberships, departmentMemberships }: DashboardProps) {
+export default function Dashboard({ clientAdmins, departmentMemberships }: DashboardProps) {
   return (
-    <Page title="Dashboard" description="These are the clients and departments you have access to.">
-      <Section title="Clients" description="Your client memberships">
-        {clientMemberships.length > 0 ? (
+    <Page title="Dashboard" description="Welcome back !">
+      {clientAdmins.length > 0 && (
+        <Section title="Client administration" description="Your company">
           <ul className="access-grid">
-            {clientMemberships.map((membership) => (
-              <li className="panel access-card" key={membership.id}>
-                <div>
-                  <h3 className="access-card__name">{membership.name}</h3>
-                  <p className="access-card__context">Client</p>
-                </div>
-                <span className="access-role">{membership.role}</span>
+            {clientAdmins.map((clientAdmin) => (
+              <li key={clientAdmin.id}>
+                <a className="panel access-card access-card--link" href="#">
+                  <div>
+                    <h3 className="access-card__name">{clientAdmin.name}</h3>
+                    <p className="access-card__context">Client</p>
+                  </div>
+                  <span className="access-role">Admin</span>
+                </a>
               </li>
             ))}
           </ul>
-        ) : (
-          <p className="access-empty">You don&apos;t have access to any clients yet.</p>
-        )}
-      </Section>
+        </Section>
+      )}
 
-      <Section
-        title="Departments"
-        description="Your department access, including access inherited from client admin roles"
-      >
+      <Section title="Memberships" description="Your department memberships">
         {departmentMemberships.length > 0 ? (
           <ul className="access-grid">
             {departmentMemberships.map((membership) => (
-              <li className="panel access-card" key={membership.id}>
-                <div>
-                  <h3 className="access-card__name">{membership.name}</h3>
-                  <p className="access-card__context">{membership.clientName}</p>
-                </div>
-                <span className="access-role">{membership.role}</span>
+              <li key={membership.id}>
+                <a className="panel access-card access-card--link" href="#">
+                  <div>
+                    <h3 className="access-card__name">{membership.name}</h3>
+                    <p className="access-card__context">{membership.clientName}</p>
+                  </div>
+                  <span className="access-role">{membership.role}</span>
+                </a>
               </li>
             ))}
           </ul>
         ) : (
-          <p className="access-empty">You don&apos;t have access to any departments yet.</p>
+          <p className="access-empty">You don&apos;t have any memberships yet.</p>
         )}
       </Section>
     </Page>
